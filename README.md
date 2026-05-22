@@ -2,11 +2,7 @@
 
 A modern, feature-rich hotel management and booking system built with **PHP**, **Bootstrap**, and **MySQL**. This application enables seamless room reservations, gallery management, and customer relationship management with a dedicated admin dashboard.
 
-👤 Developer
-Sumil Dholakiya
 
-This project demonstrates practical data science skills including exploratory data analysis, data visualization, statistical analysis, and insights generation from real-world datasets.
----
 
 ## 📋 Table of Contents
 
