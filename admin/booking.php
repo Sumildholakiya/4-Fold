@@ -1,0 +1,73 @@
+<?php include 'header.php'; ?>
+<?php include 'db.php'; ?>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0d1b2a, #1b263b);
+        color: #fff;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+    }
+
+    .table thead {
+        background-color: #181B23;
+        color: white;
+    }
+
+    .table tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        transition: 0.3s;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+            <h4 class="mb-0">All Bookings</h4>
+        </div>
+        <div class="card-body p-4">
+            <table class="table table-bordered table-hover text-center align-middle text-white">
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Phone</th>
+                        <th>Guests</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $sql = "SELECT * FROM bookings ORDER BY created_at DESC";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $checkin = date("d/m/Y", strtotime($row['checkin_date']));
+                            $checkout = date("d/m/Y", strtotime($row['checkout_date']));
+                            $created = date("d/m/Y", strtotime($row['created_at']));
+
+                            echo "<tr>
+                                    <td>{$row['customer_name']}</td>
+                                    <td>{$row['phone']}</td>
+                                    <td>{$row['guests']}</td>
+                                    <td>{$checkin}</td>
+                                    <td>{$checkout}</td>
+                                    <td>{$created}</td>
+                                  </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='8' class='text-muted'>No bookings found</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php include 'footer.php'; ?>
